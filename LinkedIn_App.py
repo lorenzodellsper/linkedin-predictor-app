@@ -46,8 +46,8 @@ st.write(
     "Center survey to predict whether someone is likely to use LinkedIn.")
 
 # Tabs
-tab_pred, tab_about, tab_det = st.tabs(
-    ["Prediction", "About the Data", "Model Details"])
+tab_pred, tab_det, tab_about = st.tabs(
+    ["Prediction", "Model Details", "About the Data"])
 
 # Prediction Tab
 with tab_pred:
@@ -97,26 +97,7 @@ with tab_pred:
         st.caption(
             "Prediction is based on logistic regression analysis of survey data.")
 
-# About the Data Tab
-with tab_about:
-    st.header("About the Data")
-    st.markdown(
-        """
-- **Source:** Pew. 
-- **Data for educational purposes only.**  
-- **Target in this app:** Whether a respondent uses LinkedIn  
-- **Predictors for this app:**
-  - Household income (coded 1–9)
-  - Education level (coded 1–8)
-  - Parent of child under 18 (0/1)
-  - Married (0/1)
-  - Female (0/1)
-  - Age (years)
-- **Sample size after cleaning:** 1,260 respondents  
-- Values such as *“don’t know”* or out-of-range codes were removed.
-        """)
-
-# Model Performance Tab
+# Model Details Tab
 with tab_det:
     st.header("Model Explanation")
 
@@ -159,3 +140,22 @@ negative coefficients decrease it (holding other variables constant).
     
     st.caption(
         "Metrics are based on a separate 20% test set that was not used to train the model." )
+
+    # About the Data Tab
+    with tab_about:
+        st.header("About the Data")
+        st.markdown(
+            """
+    - **Source:** Pew. 
+    - **Data for educational purposes only.**  
+    - **Target in this app:** Whether a respondent uses LinkedIn  
+    - **Predictors for this app:**
+      - Household income (coded 1–9)
+      - Education level (coded 1–8)
+      - Parent of child under 18 (0/1)
+      - Married (0/1)
+      - Female (0/1)
+      - Age (years)
+    - **Sample size after cleaning:** 1,260 respondents  
+    - Values such as *“don’t know”* or out-of-range codes were removed.
+            """)
