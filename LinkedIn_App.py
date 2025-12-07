@@ -152,10 +152,6 @@ with tab_app:
     - **Sample size after cleaning:** 1,260 respondents  
       - Values such as *“don’t know”* or out-of-range codes were removed.
             """)
-    st.markdown(
-            """
-    ---  
-            """)
 
     st.caption(
             """
