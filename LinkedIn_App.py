@@ -102,7 +102,7 @@ with tab_about:
     st.header("About the Data")
     st.markdown(
         """
-- **Source:** Pew Research Center survey. Data for educational purposes only.  
+- **Source:** Pew. **Data for educational purposes only.**  
 - **Target in this app:** Whether a respondent uses LinkedIn  
 - **Predictors for this app:**
   - Household income (coded 1–9)
