@@ -35,7 +35,7 @@ EDUCATION_OPTIONS = {
 st.title("LinkedIn Usage Predictor")
 
 st.write(
-    "This app uses a logistic regression model trained on a Pew Research "
+    "This app uses a logistic regression model trained on a Pew Research  "
     "Center survey to predict whether someone is likely to use LinkedIn.")
 
 # Tabs
