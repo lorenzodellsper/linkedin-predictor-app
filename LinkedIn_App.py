@@ -136,7 +136,6 @@ with tab_model:
 
 # App Details
 with tab_app:
-    st.subheader("
     st.markdown(
             """
     Model by: Lorenzo Della Speranza  
