@@ -33,8 +33,8 @@ EDUCATION_OPTIONS = {
 
 # Sidebar about me
 st.sidebar.title("About this app")
-st.sidebar.write("**Author:** Lorenzo – MSBA student")
-st.sidebar.write("**Program:** Georgetown MSBA – Programming II")
+st.sidebar.write("**Author:** Lorenzo Della Speranza")
+st.sidebar.write("**Program:** Georgetown MSBA")
 st.sidebar.write(f"**Date:** {date.today().strftime('%B %d, %Y')}")
 st.sidebar.write("**Model:** Logistic Regression")
 
@@ -102,9 +102,9 @@ with tab_about:
     st.header("About the Data")
     st.markdown(
         """
-- **Source:** Pew Research Center survey on social media use in the U.S.  
-- **Target:** Whether a respondent uses LinkedIn (`sm_li`).  
-- **Predictors used in this app:**
+- **Source:** Pew Research Center survey. Data for educational purposes only.  
+- **Target in this app:** Whether a respondent uses LinkedIn  
+- **Predictors for this app:**
   - Household income (coded 1–9)
   - Education level (coded 1–8)
   - Parent of child under 18 (0/1)
@@ -112,12 +112,12 @@ with tab_about:
   - Female (0/1)
   - Age (years)
 - **Sample size after cleaning:** 1,260 respondents  
-- Values such as *“don’t know”* or out-of-range codes were treated as missing and removed.
+- Values such as *“don’t know”* or out-of-range codes were removed.
         """)
 
 # Model Performance Tab
 with tab_perf:
-    st.header("Model Performance (held-out test set)")
+    st.header("Model Performance")
 
     # Hard-coded from model results
     accuracy = 0.67
@@ -126,9 +126,9 @@ with tab_perf:
     f1_1 = 0.60
 
     st.write(f"**Accuracy:** {accuracy:.2f}")
-    st.write(f"**Precision (LinkedIn users):** {precision_1:.2f}")
-    st.write(f"**Recall (LinkedIn users):** {recall_1:.2f}")
-    st.write(f"**F1 score (LinkedIn users):** {f1_1:.2f}")
+    st.write(f"**Precision:** {precision_1:.2f}")
+    st.write(f"**Recall:** {recall_1:.2f}")
+    st.write(f"**F1 score:** {f1_1:.2f}")
 
     st.caption(
         "Metrics are based on a separate 20% test set that was not used to train the model."
@@ -140,7 +140,7 @@ with tab_explain:
 
     st.markdown(
         """
-This model is a logistic regression, so each feature has a **coefficient**.  
+This model is a logistic regression, so each predictor has a **coefficient**.  
 Positive coefficients increase the predicted probability of using LinkedIn;  
 negative coefficients decrease it (holding other variables constant).
         """)
@@ -150,17 +150,14 @@ negative coefficients decrease it (holding other variables constant).
         {"Feature": FEATURES, "Coefficient": coefs}
     ).sort_values("Coefficient", ascending=False)
 
-    st.subheader("Feature Coefficients")
-    st.dataframe(coef_df, use_container_width=True)
-
     st.subheader("Coefficient Plot")
     fig, ax = plt.subplots(figsize=(6, 4))
     ax.barh(coef_df["Feature"], coef_df["Coefficient"])
     ax.set_xlabel("Coefficient value")
-    ax.set_ylabel("Feature")
+    ax.set_ylabel("Predictor")
     ax.invert_yaxis()
     st.pyplot(fig)
 
     st.caption(
-        "Larger positive coefficients indicate features associated with a higher likelihood "
+        "Larger positive coefficients indicate predictors associated with a higher likelihood "
         "of LinkedIn use in this survey sample.")
