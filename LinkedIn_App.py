@@ -74,7 +74,7 @@ with tab_pred:
     female_label = st.radio("Gender", ["Not female", "Female"])
     female = 1 if female_label == "Female" else 0
 
-    age = st.number_input("Age (years)", min_value=18, max_value=100, value=42, step=1)
+    age = st.number_input("Age (years)", min_value=18, max_value=100, value=25, step=1)
 
     # Build input row
     input_df = pd.DataFrame(
