@@ -146,18 +146,16 @@ negative coefficients decrease it (holding other variables constant).
 
     st.header("Model Performance")
     
-        # Hard-coded from model results
-        accuracy = 0.67
-        precision_1 = 0.50
-        recall_1 = 0.74
-        f1_1 = 0.60
+    # Hard-coded from model results
+    accuracy = 0.67
+    precision_1 = 0.50
+    recall_1 = 0.74
+    f1_1 = 0.60
     
-        st.write(f"**Accuracy:** {accuracy:.2f}")
-        st.write(f"**Precision:** {precision_1:.2f}")
-        st.write(f"**Recall:** {recall_1:.2f}")
-        st.write(f"**F1 score:** {f1_1:.2f}")
+    st.write(f"**Accuracy:** {accuracy:.2f}")
+    st.write(f"**Precision:** {precision_1:.2f}")
+    st.write(f"**Recall:** {recall_1:.2f}")
+    st.write(f"**F1 score:** {f1_1:.2f}")
     
-        st.caption(
-            "Metrics are based on a separate 20% test set that was not used to train the model."
-        )
-
+    st.caption(
+        "Metrics are based on a separate 20% test set that was not used to train the model." )
