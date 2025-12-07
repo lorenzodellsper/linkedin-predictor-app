@@ -31,13 +31,6 @@ EDUCATION_OPTIONS = {
     "7: Some postgraduate / professional": 7,
     "8: Postgraduate / professional degree": 8,}
 
-# Sidebar about me
-st.sidebar.title("About this app")
-st.sidebar.write("**Author:** Lorenzo Della Speranza")
-st.sidebar.write("**Program:** Georgetown MSBA")
-st.sidebar.write(f"**Date:** {date.today().strftime('%B %d, %Y')}")
-st.sidebar.write("**Model:** Logistic Regression")
-
 # Main Title
 st.title("LinkedIn Usage Predictor")
 
@@ -47,7 +40,7 @@ st.write(
 
 # Tabs
 tab_pred, tab_det, tab_about = st.tabs(
-    ["Prediction", "Model Details", "About the Data"])
+    ["Prediction", "Model Details", "About the App"])
 
 # Prediction Tab
 with tab_pred:
@@ -103,9 +96,9 @@ with tab_det:
 
     st.markdown(
         """
-This model is a logistic regression, so each predictor has a **coefficient**.  
-Positive coefficients increase the predicted probability of using LinkedIn;  
-negative coefficients decrease it (holding other variables constant).
+    This model is a logistic regression, so each predictor has a **coefficient**.  
+    Positive coefficients increase the predicted probability of using LinkedIn;  
+    negative coefficients decrease it (holding other variables constant).
         """)
 
     coefs = log_reg.coef_[0]
@@ -141,10 +134,15 @@ negative coefficients decrease it (holding other variables constant).
     st.caption(
         "Metrics are based on a separate 20% test set that was not used to train the model." )
 
-    # About the Data Tab
-    with tab_about:
-        st.header("About the Data")
-        st.markdown(
+# About the Data Tab
+with tab_about:
+    Model by: Lorenzo Della Speranza
+    Institution: Georgetown University
+    Program: Masters In Business Analytics
+    Date: December 2025
+    
+    st.header("About the Data")
+    st.markdown(
             """
     - **Source:** Pew. 
     - **Data for educational purposes only.**  
