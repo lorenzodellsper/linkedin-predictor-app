@@ -1,15 +1,15 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import matplotlib.pyplot as plt
+from datetime import date
 
-# Load Model
+# Load trained model
 log_reg = joblib.load("linkedin_logreg.joblib")
 
-# Model feature order (must match training!)
 FEATURES = ['income', 'education', 'parent', 'married', 'female', 'age']
 
-# Option labels
-
+# Option Label Dropdown
 INCOME_OPTIONS = {
     "1: Less than $10,000": 1,
     "2: $10k–$20k": 2,
@@ -31,63 +31,136 @@ EDUCATION_OPTIONS = {
     "7: Some postgraduate / professional": 7,
     "8: Postgraduate / professional degree": 8,}
 
-# App Interface
+# Sidebar about me
+st.sidebar.title("About this app")
+st.sidebar.write("**Author:** Lorenzo – MSBA student")
+st.sidebar.write("**Program:** Georgetown MSBA – Programming II")
+st.sidebar.write(f"**Date:** {date.today().strftime('%B %d, %Y')}")
+st.sidebar.write("**Model:** Logistic Regression")
 
+# Main Title
 st.title("LinkedIn Usage Predictor")
 
 st.write(
-    "This app uses a logistic regression model trained on survey data "
-    "to predict whether someone is likely to use LinkedIn.")
+    "This app uses a logistic regression model trained on a Pew Research "
+    "Center survey to predict whether someone is likely to use LinkedIn.")
 
-st.header("Enter Individual Information")
+# Tabs
+tab_pred, tab_about, tab_perf, tab_explain = st.tabs(
+    ["Prediction", "About the Data", "Model Performance", "Model Explanation"])
 
-# Income
-income_label = st.selectbox(
-    "Household Income",
-    options=list(INCOME_OPTIONS.keys()),
-    index=7)
-income = INCOME_OPTIONS[income_label]
+# Prediction Tab
+with tab_pred:
+    st.header("Enter Individual Information")
 
-# Education
-education_label = st.selectbox(
-    "Education Level",
-    options=list(EDUCATION_OPTIONS.keys()),
-    index=6)
-education = EDUCATION_OPTIONS[education_label]
+    income_label = st.selectbox(
+        "Household Income",
+        options=list(INCOME_OPTIONS.keys()),
+        index=7)
+    income = INCOME_OPTIONS[income_label]
 
-# Parent (0/1)
-parent_label = st.radio("Parent of a child under 18?", ["No", "Yes"])
-parent = 1 if parent_label == "Yes" else 0
+    education_label = st.selectbox(
+        "Education Level",
+        options=list(EDUCATION_OPTIONS.keys()),
+        index=6)
+    education = EDUCATION_OPTIONS[education_label]
 
-# Married (0/1)
-married_label = st.radio("Married?", ["No", "Yes"])
-married = 1 if married_label == "Yes" else 0
+    parent_label = st.radio("Parent of a child under 18?", ["No", "Yes"])
+    parent = 1 if parent_label == "Yes" else 0
 
-# Female (0/1)
-female_label = st.radio("Gender", ["Not female", "Female"])
-female = 1 if female_label == "Female" else 0
+    married_label = st.radio("Married?", ["No", "Yes"])
+    married = 1 if married_label == "Yes" else 0
 
-# Age
-age = st.number_input("Age (years)", min_value=18, max_value=100, value=42, step=1)
+    female_label = st.radio("Gender", ["Not female", "Female"])
+    female = 1 if female_label == "Female" else 0
 
-# Build input row for model
-input_df = pd.DataFrame(
-    [[income, education, parent, married, female, age]],
-    columns=FEATURES)
+    age = st.number_input("Age (years)", min_value=18, max_value=100, value=42, step=1)
 
-# Prediction
-st.subheader("Prediction")
+    # Build input row
+    input_df = pd.DataFrame(
+        [[income, education, parent, married, female, age]],
+        columns=FEATURES)
 
-if st.button("Predict LinkedIn Usage"):
-    prob = log_reg.predict_proba(input_df)[0][1]
-    pred = log_reg.predict(input_df)[0]
+    st.subheader("Prediction")
 
-    st.write(f"**Predicted probability of using LinkedIn:** {prob:.2%}")
+    if st.button("Predict LinkedIn Usage"):
+        prob = log_reg.predict_proba(input_df)[0][1]
+        pred = log_reg.predict(input_df)[0]
 
-    if pred == 1:
-        st.success("The model predicts this person **uses LinkedIn**.")
-    else:
-        st.warning("The model predicts this person **does not use LinkedIn**.")
+        st.write(f"**Predicted probability of using LinkedIn:** {prob:.2%}")
+
+        if pred == 1:
+            st.success("The model predicts this person **uses LinkedIn**.")
+        else:
+            st.warning("The model predicts this person **does not use LinkedIn**.")
+
+        st.caption(
+            "Prediction is based on logistic regression analysis of survey data.")
+
+# About the Data Tab
+with tab_about:
+    st.header("About the Data")
+    st.markdown(
+        """
+- **Source:** Pew Research Center survey on social media use in the U.S.  
+- **Target:** Whether a respondent uses LinkedIn (`sm_li`).  
+- **Predictors used in this app:**
+  - Household income (coded 1–9)
+  - Education level (coded 1–8)
+  - Parent of child under 18 (0/1)
+  - Married (0/1)
+  - Female (0/1)
+  - Age (years)
+- **Sample size after cleaning:** 1,260 respondents  
+- Values such as *“don’t know”* or out-of-range codes were treated as missing and removed.
+        """)
+
+# Model Performance Tab
+with tab_perf:
+    st.header("Model Performance (held-out test set)")
+
+    # Hard-coded from model results
+    accuracy = 0.67
+    precision_1 = 0.50
+    recall_1 = 0.74
+    f1_1 = 0.60
+
+    st.write(f"**Accuracy:** {accuracy:.2f}")
+    st.write(f"**Precision (LinkedIn users):** {precision_1:.2f}")
+    st.write(f"**Recall (LinkedIn users):** {recall_1:.2f}")
+    st.write(f"**F1 score (LinkedIn users):** {f1_1:.2f}")
 
     st.caption(
-        "Prediction is based on logistic regression analysis of survey data.")
+        "Metrics are based on a separate 20% test set that was not used to train the model."
+    )
+
+# Model Explanation
+with tab_explain:
+    st.header("Model Explanation")
+
+    st.markdown(
+        """
+This model is a logistic regression, so each feature has a **coefficient**.  
+Positive coefficients increase the predicted probability of using LinkedIn;  
+negative coefficients decrease it (holding other variables constant).
+        """)
+
+    coefs = log_reg.coef_[0]
+    coef_df = pd.DataFrame(
+        {"Feature": FEATURES, "Coefficient": coefs}
+    ).sort_values("Coefficient", ascending=False)
+
+    st.subheader("Feature Coefficients")
+    st.dataframe(coef_df, use_container_width=True)
+
+    st.subheader("Coefficient Plot")
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.barh(coef_df["Feature"], coef_df["Coefficient"])
+    ax.set_xlabel("Coefficient value")
+    ax.set_ylabel("Feature")
+    ax.invert_yaxis()
+    st.pyplot(fig)
+
+    st.caption(
+        "Larger positive coefficients indicate features associated with a higher likelihood "
+        "of LinkedIn use in this survey sample.")
