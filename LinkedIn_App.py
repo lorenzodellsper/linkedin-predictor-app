@@ -155,5 +155,5 @@ with tab_app:
 
     st.caption(
             """
-    Created by Lorenzo Della Speranza | Georgetown University | December 2025  
+    Model and App Created by Lorenzo Della Speranza | Georgetown University | December 2025  
             """)
