@@ -39,8 +39,8 @@ st.write(
     "Center survey to predict whether someone is likely to use LinkedIn.")
 
 # Tabs
-tab_pred, tab_det, tab_about = st.tabs(
-    ["Prediction", "Model Details", "About the App"])
+tab_pred, tab_model, tab_app = st.tabs(
+    ["Prediction", "Model Details", "App Details"])
 
 # Prediction Tab
 with tab_pred:
@@ -91,7 +91,7 @@ with tab_pred:
             "Prediction is based on logistic regression analysis of survey data.")
 
 # Model Details Tab
-with tab_det:
+with tab_model:
     st.header("Model Explanation")
 
     st.markdown(
@@ -134,8 +134,9 @@ with tab_det:
     st.caption(
         "Metrics are based on a separate 20% test set that was not used to train the model." )
 
-# About the Data Tab
-with tab_about:
+# App Details
+with tab_app:
+    st.subheader("
     st.markdown(
             """
     Model by: Lorenzo Della Speranza  
