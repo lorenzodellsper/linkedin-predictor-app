@@ -139,10 +139,9 @@ with tab_app:
     st.header("About the Data")
     st.markdown(
             """
-    - **Source:** Pew. 
-    - **Data for educational purposes only.**  
-    - **Target in this app:** Whether a respondent uses LinkedIn  
-    - **Predictors for this app:**
+    - **Source:** Pew. Data for educational purposes only.
+    - **Target:** Whether a respondent uses LinkedIn  
+    - **Predictors:**
       - Household income (coded 1–9)
       - Education level (coded 1–8)
       - Parent of child under 18 (0/1)
@@ -150,7 +149,7 @@ with tab_app:
       - Female (0/1)
       - Age (years)
     - **Sample size after cleaning:** 1,260 respondents  
-    - Values such as *“don’t know”* or out-of-range codes were removed.
+      - Values such as *“don’t know”* or out-of-range codes were removed.
             """)
     st.markdown(
             """
