@@ -154,5 +154,10 @@ with tab_app:
             """)
     st.markdown(
             """
+    ---  
+            """)
+
+    st.markdown(
+            """
     Created by Lorenzo Della Speranza | Georgetown University | December 2025  
             """)
