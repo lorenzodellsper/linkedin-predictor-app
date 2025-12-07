@@ -135,12 +135,7 @@ with tab_model:
         "Metrics are based on a separate 20% test set that was not used to train the model." )
 
 # App Details
-with tab_app:
-    st.markdown(
-            """
-    Created by Lorenzo Della Speranza | Georgetown University | December 2025  
-            """)
-    
+with tab_app:  
     st.header("About the Data")
     st.markdown(
             """
@@ -156,4 +151,8 @@ with tab_app:
       - Age (years)
     - **Sample size after cleaning:** 1,260 respondents  
     - Values such as *“don’t know”* or out-of-range codes were removed.
+            """)
+    st.markdown(
+            """
+    Created by Lorenzo Della Speranza | Georgetown University | December 2025  
             """)
