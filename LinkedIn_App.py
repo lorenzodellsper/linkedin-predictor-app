@@ -138,10 +138,10 @@ with tab_det:
 with tab_about:
     st.markdown(
             """
-    Model by: Lorenzo Della Speranza
-    Institution: Georgetown University
-    Program: Masters In Business Analytics
-    Date: December 2025
+    Model by: Lorenzo Della Speranza  
+    Institution: Georgetown University  
+    Program: Masters In Business Analytics  
+    Date: December 2025  
             """)
     
     st.header("About the Data")
