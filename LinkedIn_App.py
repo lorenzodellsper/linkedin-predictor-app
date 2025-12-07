@@ -157,7 +157,7 @@ with tab_app:
     ---  
             """)
 
-    st.markdown(
+    st.caption(
             """
     Created by Lorenzo Della Speranza | Georgetown University | December 2025  
             """)
