@@ -46,8 +46,8 @@ st.write(
     "Center survey to predict whether someone is likely to use LinkedIn.")
 
 # Tabs
-tab_pred, tab_about, tab_perf, tab_explain = st.tabs(
-    ["Prediction", "About the Data", "Model Performance", "Model Explanation"])
+tab_pred, tab_about, tab_det = st.tabs(
+    ["Prediction", "About the Data", "Model Details"])
 
 # Prediction Tab
 with tab_pred:
@@ -117,26 +117,7 @@ with tab_about:
         """)
 
 # Model Performance Tab
-with tab_perf:
-    st.header("Model Performance")
-
-    # Hard-coded from model results
-    accuracy = 0.67
-    precision_1 = 0.50
-    recall_1 = 0.74
-    f1_1 = 0.60
-
-    st.write(f"**Accuracy:** {accuracy:.2f}")
-    st.write(f"**Precision:** {precision_1:.2f}")
-    st.write(f"**Recall:** {recall_1:.2f}")
-    st.write(f"**F1 score:** {f1_1:.2f}")
-
-    st.caption(
-        "Metrics are based on a separate 20% test set that was not used to train the model."
-    )
-
-# Model Explanation
-with tab_explain:
+with tab_det:
     st.header("Model Explanation")
 
     st.markdown(
@@ -162,3 +143,21 @@ negative coefficients decrease it (holding other variables constant).
     st.caption(
         "Larger positive coefficients indicate predictors associated with a higher likelihood "
         "of LinkedIn use in this survey sample.")
+
+    st.header("Model Performance")
+    
+        # Hard-coded from model results
+        accuracy = 0.67
+        precision_1 = 0.50
+        recall_1 = 0.74
+        f1_1 = 0.60
+    
+        st.write(f"**Accuracy:** {accuracy:.2f}")
+        st.write(f"**Precision:** {precision_1:.2f}")
+        st.write(f"**Recall:** {recall_1:.2f}")
+        st.write(f"**F1 score:** {f1_1:.2f}")
+    
+        st.caption(
+            "Metrics are based on a separate 20% test set that was not used to train the model."
+        )
+
